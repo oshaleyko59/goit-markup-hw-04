@@ -9,7 +9,7 @@
   --color-background-secondary: #f5f4fa; /*btns */
   --color-background-black: #2f303a;
   --color-border: #eeeeee;
-
+  --color-fill-inactive: #afb1b8;
   /* net values */
   --net-row-num: 3;
   --net-space: 30px;
@@ -28,7 +28,6 @@ p {
 }
 
 img {
-  /* display: inline-block; */
   display: block;
   max-width: 100%;
   height: auto;
@@ -76,9 +75,10 @@ body {
   overflow: hidden;
 }
 
-.accent-link:hover,
-.accent-link:focus {
+.active-link:hover,
+.active-link:focus {
   color: var(--color-accent);
+  fill: var(--color-accent);
 }
 
 .container {
@@ -87,6 +87,14 @@ body {
   padding-right: 15px;
   margin: 0 auto;
   /* outline: 2px solid red; */
+}
+
+.bg-color-secondary {
+  background-color: var(--color-background-secondary);
+}
+
+.section {
+  padding: 94px 0;
 }
 
 /* ============================== HEADER ============================== */
@@ -107,7 +115,6 @@ body {
   font-weight: 700;
   line-height: calc(31 / 26);
   display: inline-block;
-
   margin-right: 93px;
 }
 
@@ -126,11 +133,12 @@ body {
 
 .hdr-list {
   display: flex;
-}
-
-.nav-list {
   font-weight: 500;
-  letter-spacing: 0.02em;
+  /* line height increased to extende link active zone */
+  padding: auto 0;
+  line-height: 3;
+  /* line-height: 1.14;
+    padding: 23px 0; */
 }
 
 .hdr-list > li {
@@ -141,24 +149,38 @@ body {
   margin-right: 0px;
 }
 
-.nav-list-link {
-  color: var(--color-secondary);
-  line-height: 1.14;
-  padding: 23px 0;
+.nav-list {
+  letter-spacing: 0.02em;
 }
 
-.contact-list-link {
-  font-weight: 500;
-  color: var(--color-primary);
-  line-height: 1.14;
-  padding: 23px 0;
+.nav-list-link {
+  display: inline-block;
+  color: var(--color-secondary);
 }
 
 .nav-list-link.current {
   color: var(--color-accent);
 }
 
+.contact-list-link {
+  color: var(--color-primary);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  fill: var(--color-primary);
+}
+
+/* TODO??? */
+.inactive-icon {
+  /* fill: var(--color-fill-inactive); */
+}
+
 /* ============================== FOOTER ============================== */
+
+.ftr-container {
+  display: flex;
+  align-items: center;
+}
 
 .page-footer {
   padding-top: 60px;
@@ -192,14 +214,76 @@ body {
   max-height: 21px;
   margin-bottom: 9px;
 }
+
 .addr-list-item:last-child {
   margin-bottom: 0;
 }
 
+.social {
+  margin-left: 70px;
+}
+
+.social-hdr {
+  margin-bottom: 20px;
+  color: #ffffff;
+  text-transform: uppercase;
+  font-size: 14px;
+  line-height: calc(16.41 / 14);
+  /* letter-spacing: 0.03em; */
+}
+
+.soc-list {
+  display: flex;
+  gap: 10px;
+}
+
+.soc-item {
+  width: 44px;
+  height: 44px;
+}
+
+.soc-link {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* fill: var(--color-fill-inactive); */
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.soc-icon {
+  fill: var(--color-fill-inactive);
+}
+
+.soc-link:focus,
+.soc-link:hover {
+  background-color: var(--color-accent);
+}
+
+.soc-link:focus .soc-icon,
+.soc-link:hover .soc-icon {
+  fill: #fff;
+}
+
 /* ============================== HERO ============================== */
 
+/* «C1» Велике зображення з ефектом затемнення (під хедером) виконано як фон i
+не розтягується ширше свого оригінального розміру 1600рх.
+ Для затемнення використовується багатошаровий фон з градієнтом  */
 .hero {
-  background-color: var(--color-background-black);
+  /* background-color: var(--color-background-black); */
+  background-color: #c4c4c4;
+  background-image: linear-gradient(
+      rgba(47, 48, 58, 0.4),
+      rgba(47, 48, 58, 0.4)
+    ),
+    url(../images/Img.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+
   padding-top: 200px;
   padding-bottom: 200px;
 }
@@ -224,25 +308,55 @@ body {
   font-weight: 700;
   line-height: calc(30 / 16);
   letter-spacing: 0.06em;
+  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+  border-style: none;
 }
 
-/* ============================== PROFILE ============================== */
+/* =========================== OTHER SECTIONS ========================== */
 
-.profile {
-  padding-top: 94px;
-  padding-bottom: 94px;
+.section-h2 {
+  color: var(--color-secondary);
+  font-size: 36px;
+  line-height: calc(42 / 36);
+  text-align: center;
+  margin-bottom: 50px;
 }
 
-.profile-list {
+.section-list {
   display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 30px;
 }
 
 .profile-item {
   width: 270px;
-  margin-right: 30px;
 }
-.profile-item:last-child {
-  margin-right: 0;
+
+.profile-item::before {
+  display: block;
+  content: "";
+  height: 120px;
+  width: 270px;
+  margin-bottom: 30px;
+  border-radius: 4px;
+  background-color: var(--color-background-secondary);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.attention.profile-item::before {
+  background-image: url("../images/antenna.svg");
+}
+.punctuality.profile-item::before {
+  background-image: url("../images/clock.svg");
+}
+.planning.profile-item::before {
+  background-image: url("../images/diagram.svg");
+}
+
+.technology.profile-item::before {
+  background-image: url("../images/astronaut.svg");
 }
 
 .profile-title {
@@ -254,38 +368,21 @@ body {
   margin-bottom: 10px;
 }
 
-/* ============================== COMPETENCE & TEAM ============================== */
+.profile-description {
+  text-transform: capitalize;
+}
+
+/* ===================== SECTION  ============================== */
 
 .competence {
   padding-bottom: 94px;
 }
 
-.team {
-  background-color: var(--color-background-secondary);
-  padding-top: 95px;
-  padding-bottom: 93px;
-}
-
-.competence-list,
-.team-list {
-  display: flex;
-
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.competence-hdr,
-.team-hdr {
-  color: var(--color-secondary);
-  font-size: 36px;
-  line-height: calc(42 / 36);
-  text-align: center;
-  margin-bottom: 50px;
-}
-
 .competence-list-item {
-  min-width: 370 px;
+  min-width: 370px;
 }
+
+/* ===================== SECTION TEAM & CLIENTS ============================== */
 
 .team-card {
   background-color: var(--color-white);
@@ -294,7 +391,9 @@ body {
   text-align: center;
   padding-bottom: 30px;
   border-radius: 0px 0px 4px 4px;
-  box-shadow: 0 2px 1px var(--color-primary);
+  /* = «C3» У картках секції Наша команда є постійний ефект тіні. */
+  box-shadow: 0px 2px 1px 0px #00000033, 0px 1px 1px 0px #00000024,
+    0px 1px 3px 0px #0000001f;
 }
 
 .team-card-name {
@@ -302,6 +401,46 @@ body {
   font-weight: 500;
   margin-bottom: 10px;
   margin-top: 30px;
+}
+
+.team-card-description {
+  margin-bottom: 16px;
+}
+
+.soc-list.team-list {
+  justify-content: center;
+}
+
+/* ===================== SECTION CLIENTS ============================== */
+
+.clients-item {
+  height: 92px;
+  width: 170px;
+}
+
+.client-link {
+  display: inline-block;
+  /* height: 92px;
+  width: 170px; */
+  border-radius: 4px;
+  border: 1px solid var(--color-fill-inactive);
+  padding: 16px 32px;
+}
+
+.clients-icon {
+  height: 60px;
+  width: 106px;
+  fill: var(--color-fill-inactive);
+}
+
+.client-link:focus,
+.client-link:hover {
+  border-color: var(--color-accent);
+}
+
+.client-link:focus .clients-icon,
+.client-link:hover .clients-icon {
+  fill: var(--color-accent);
 }
 
 /* ============================== PORTFOLIO PAGE ============================== */
@@ -335,27 +474,38 @@ body {
   border-style: none;
 }
 
+/* = «C5» У фільтрі (список кнопок) сторінки Портфоліо є ефект тіні при ховері або фокусі на кнопки. */
 .filter-btn:hover,
 .filter-btn:focus {
   color: var(--color-white);
+  background-color: var(--color-accent);
+  box-shadow: 0px 2px 2px 0px #0000001f, 0px 1px 2px 0px #00000014,
+    0px 3px 1px 0px #0000001a;
 }
 
 .project-list {
   display: flex;
   flex-wrap: wrap;
   margin-top: calc((-1) * var(--net-space));
-  margin-left: calc((-1) * var(--net-space) );
+  margin-left: calc((-1) * var(--net-space));
 }
 
 .project-list-item {
   margin-left: var(--net-space);
-   margin-top: var(--net-space);
+  margin-top: var(--net-space);
+  flex-basis: calc(
+    100% / var(--net-row-num) - var(--net-space) * (var(--net-row-num - 1))
+  );
+}
 
-  flex-basis: calc(100% / var(--net-row-num) - var(--net-space) * (var(--net-row-num - 1)));
+/* «C4» = У картках сторінки Портфоліо є ефект тіні при ховері в будь-якому місці картки. */
+.project-card:hover {
+  box-shadow: 1px 4px 6px 0px #00000029, 0px 4px 4px 0px #0000000f,
+    0px 1px 1px 0px #0000001f;
 }
 
 .project-description {
-  margin:0;
+  margin: 0;
   padding: 20px 24px 19px;
   border-bottom: 1px solid var(--color-border);
   border-left: 1px solid var(--color-border);
@@ -375,5 +525,4 @@ body {
   color: var(--color-primary);
   font-size: 16px;
   line-height: calc(30 / 16);
-
 }
