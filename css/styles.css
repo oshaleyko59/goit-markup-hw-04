@@ -172,14 +172,14 @@ body {
 
 /* TODO??? */
 .inactive-icon {
-  /* fill: var(--color-fill-inactive); */
+  /* fill: var(--co lor-fill-inactive); */
 }
 
 /* ============================== FOOTER ============================== */
 
 .ftr-container {
   display: flex;
-  align-items: center;
+  align-items:flex-start;
 }
 
 .page-footer {
@@ -219,11 +219,12 @@ body {
   margin-bottom: 0;
 }
 
-.social {
+.ftr-soc-wrap {
+  padding-top: 12px;
   margin-left: 70px;
 }
 
-.social-hdr {
+.ftr-soc-hdr {
   margin-bottom: 20px;
   color: #ffffff;
   text-transform: uppercase;
@@ -231,6 +232,16 @@ body {
   line-height: calc(16.41 / 14);
   /* letter-spacing: 0.03em; */
 }
+
+.ftr-soc-link{
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.ftr-soc-icon {
+  fill: #ffffff;
+}
+
+/* ============================== SOCIAL LINKS ============================== */
 
 .soc-list {
   display: flex;
@@ -249,12 +260,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* fill: var(--color-fill-inactive); */
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
-.soc-icon {
-  fill: var(--color-fill-inactive);
 }
 
 .soc-link:focus,
@@ -266,6 +271,11 @@ body {
 .soc-link:hover .soc-icon {
   fill: #fff;
 }
+
+.soc-icon {
+  fill: var(--color-fill-inactive);
+}
+
 
 /* ============================== HERO ============================== */
 
@@ -282,10 +292,13 @@ body {
     url(../images/Img.jpg);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: contain;
+  background-size: cover;
+  /* contain; */
 
   padding-top: 200px;
   padding-bottom: 200px;
+    max-width: 1600px;
+    margin: 0 auto;
 }
 
 .hero-hdr {
@@ -372,7 +385,7 @@ body {
   text-transform: capitalize;
 }
 
-/* ===================== SECTION  ============================== */
+/* ===================== SECTION  COMPETENCE ============================== */
 
 .competence {
   padding-bottom: 94px;
@@ -410,6 +423,8 @@ body {
 .soc-list.team-list {
   justify-content: center;
 }
+
+
 
 /* ===================== SECTION CLIENTS ============================== */
 
